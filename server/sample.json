@@ -1,0 +1,9 @@
+[
+    {
+      "title":  "Spider-Man Across the Spider Verse",
+      "img":    "spidermanspiderverse.jpg",
+      "release":"2023",
+      "review": "Loved the plot twist!",
+      "id":     "some-uuid-here"
+    }
+  ]
