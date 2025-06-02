@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const crypto = require('crypto');
+
 
 const app = express();
 app.use(cors());
@@ -22,7 +22,8 @@ const reviewSchema = new mongoose.Schema({
     comments: [{
         user: String,
         comment: String
-    }]
+    }],
+    likes: Number
 });
 
 const Review = mongoose.model('Review', reviewSchema);
@@ -47,7 +48,8 @@ app.post('/reviews', async (req,res)=> {
         title: title,
         release: release,
         review: review,
-        comments: []
+        comments: [],
+        likes: 0
     });
 
     await newReview.save();
@@ -91,12 +93,41 @@ app.post('/comments/:id', async (req,res)=> {
         review.comments.push({user: 'anonomyous', comment: comment});
         console.log(review);
         await review.save();
-        res.json(review);
+
     } catch (error) {
         console.log(error);
-    }
-    
+    };
+});
 
+app.post('/likes/:id', async (req,res)=> {
+    console.log('/POST /likes called');
+    try {
+        const id = req.params.id;
+        const {liked} = req.body;
+
+        const review = await Review.findById(id);
+        if (!review) {
+            res.status(404).json({message: 'Not found'});
+        };
+
+        if (liked) {
+            review.likes += 1;
+            await review.save();
+            console.log(review);
+            return res.json({message: 'liked successfully'});
+        } else {
+            if (review.likes > 0) {
+                review.likes -= 1;
+            };
+            await review.save();
+            console.log(review);
+            return res.json({message: 'unliked successfully'});
+        }
+
+    } catch (error) {
+        console.log('likes could not be done')
+        res.status(400).json({ message: 'likes could not be found' });
+    }
 })
 
 app.listen(3000, () => {

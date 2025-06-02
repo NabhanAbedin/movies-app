@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import '../styles/fullMoviePage.css';
 import Nav from './Nav';
 import Comments from './comments';
+import LikeButton from './likeButton';
 
 
 const MovieFullPage = () => {
@@ -42,7 +43,8 @@ const MovieFullPage = () => {
             </div>
         
         </div>
-        <Comments id={id} data={data} comments={data.comments}/>
+        <LikeButton likes={data.likes}/>
+        <Comments id={id} data={data} setData={setData}/>
 
         </>
        )}

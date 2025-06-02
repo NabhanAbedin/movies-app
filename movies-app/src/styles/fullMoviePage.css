@@ -140,3 +140,64 @@
   color: #555;
   margin: 0;
 }
+
+
+.like-wrapper {
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.like-button-container {
+  width: 70px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-button-container.active {
+  background-color: #ff5722;  /* vibrant accent, e.g. deep orange */
+}
+.like-button-container.active p {
+  color: #ffffff;            /* ensure the count is white on orange */
+}
+.like-button-container.active img {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.like-button-container:hover {
+  background-color: #e0e0e0;
+}
+
+/* Button resets for the icon */
+.like-button-container img {
+  width: 25px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Thumbs-up icon size */
+.like-button-container button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Like count styling */
+.like-button-container p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333333;
+}
