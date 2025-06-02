@@ -19,7 +19,10 @@ const reviewSchema = new mongoose.Schema({
     img: String,
     release: String,
     review: String,
-    id: String
+    comments: [{
+        user: String,
+        comment: String
+    }]
 });
 
 const Review = mongoose.model('Review', reviewSchema);
@@ -44,7 +47,7 @@ app.post('/reviews', async (req,res)=> {
         title: title,
         release: release,
         review: review,
-        id: crypto.randomUUID()
+        comments: []
     });
 
     await newReview.save();
@@ -52,7 +55,48 @@ app.post('/reviews', async (req,res)=> {
     } catch (error) {
         console.log(error);
         res.status(400).json({ message: 'Review could not be added' });
+    };
+});
+
+app.get('/movies/:id', async (req,res)=> {
+    console.log('GET /movies called');
+    try {
+        const id = req.params.id;
+        const review = await Review.findById(id);
+
+        if (!review) {
+            res.status(404).json({message: 'Not found'});
+        };
+        console.log(review);
+        res.json(review);
+        res.status(201);
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ message: 'Review could not be found' });
     }
+})
+
+app.post('/comments/:id', async (req,res)=> {
+    console.log('POST /comments called');
+    try {
+        const id = req.params.id;
+        const {comment} = req.body;
+        console.log(comment)
+        const review = await Review.findById(id);
+        if (!review) {
+            res.status(404).json({message: 'Not found'});
+        };
+        
+        review.comments.push({user: 'anonomyous', comment: comment});
+        console.log(review);
+        await review.save();
+        res.json(review);
+    } catch (error) {
+        console.log(error);
+    }
+    
+
 })
 
 app.listen(3000, () => {

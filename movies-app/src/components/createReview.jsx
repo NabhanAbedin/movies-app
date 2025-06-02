@@ -1,14 +1,14 @@
-import {useState} from 'react';
+import {use, useEffect, useState} from 'react';
 import Nav from './Nav';
 import '../styles/createReview.css';
 
 const UserInput = ({setData,value}) => {
     const [text,setText] = useState('');
-    const [confirmed, setConfirmed] = useState(false);
 
-    const handleClick =() => {
-        setData(prev => ({...prev, [value]: text}))
-        setConfirmed(true);
+    const handleType = (e) => {
+       const newVal = e.target.value;
+       setText(newVal)
+        setData(prev => ({ ...prev, [value]: newVal }));
     }
 
     return (
@@ -17,13 +17,13 @@ const UserInput = ({setData,value}) => {
             <div className="input-row">
               <input
                 type="text"
+                value={text}
                 placeholder={value}
-                onChange={(e) => setText(e.target.value)}
+                onChange={handleType}
                 style={{
-                  border: confirmed ? '2px solid green' : '2px solid gray'
+                  border: text ? '2px solid green' : '2px solid gray'
                 }}
               />
-              <button onClick={handleClick}>Confirm</button>
             </div>
         </div>
     );
@@ -31,12 +31,13 @@ const UserInput = ({setData,value}) => {
 
 const ReviewInput = ({ setData }) => {
   const [text, setText] = useState('');
-  const [confirmed, setConfirmed] = useState(false);
 
-  const handleClick = () => {
-    setData(prev => ({ ...prev, review: text }));
-    setConfirmed(true);
+  const handleType = (e) => {
+    const newVal = e.target.value;
+    setText(newVal)
+     setData(prev => ({ ...prev, review: newVal }));
   };
+  
 
   return (
     <div className="input-container">
@@ -45,13 +46,12 @@ const ReviewInput = ({ setData }) => {
         <textarea
           className="review-textarea"
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={handleType}
           placeholder="Enter your review!"
           style={{
-            border: confirmed ? '2px solid green' : '2px solid gray'
+            border: text ? '2px solid green' : '2px solid gray'
           }}
         />
-        <button onClick={handleClick}>Confirm</button>
       </div>
     </div>
   );
@@ -59,6 +59,8 @@ const ReviewInput = ({ setData }) => {
 
 const CreateReview = () => {
         const [data,setData] = useState({});
+        const [success,setSuccess] = useState(false);
+
         const required = ['title','release','review'];
 
         const handleSubmit = async () => {
@@ -73,6 +75,13 @@ const CreateReview = () => {
                     });
                     const d = await response.json();
                     console.log(d);
+                    if (response.ok) {
+                        setSuccess(true);
+
+                        setTimeout(()=> {
+                            setSuccess(false);
+                        },2000);
+                    };
                 } catch (error) {
                     console.log(error);
                 };
@@ -80,7 +89,6 @@ const CreateReview = () => {
                 alert('Your review is incomplete!');
             };
         };
-
 
         return (
             <>
@@ -93,6 +101,9 @@ const CreateReview = () => {
                 <div className='publish-container'>
                 <h1>Publish Your Review!</h1>
                 <button onClick={handleSubmit}>Publish</button>
+                {success && (<div className="success-container">
+                <p className="success-text" >Added Review!</p>
+            </div>)}
                 </div>
                 </div>
                 

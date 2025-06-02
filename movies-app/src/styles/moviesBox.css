@@ -20,6 +20,11 @@
     cursor: pointer;
 }
 
+.review-link {
+    text-decoration: none;
+    color: black;
+}
+
 
 .review-body {
     flex: 1;

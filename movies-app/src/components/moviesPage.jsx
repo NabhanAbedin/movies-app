@@ -20,6 +20,7 @@ const ReviewPage = () => {
             const response = await fetch('http://localhost:3000/reviews');
             const d = await response.json();
             setData(d);
+            console.log(d);
             } catch (error) {
             console.log(error);
             };
