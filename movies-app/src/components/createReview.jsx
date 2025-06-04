@@ -1,6 +1,7 @@
-import {use, useEffect, useState} from 'react';
+import {useState} from 'react';
 import Nav from './Nav';
 import '../styles/createReview.css';
+import { submitPayload } from '../api/apiFunctions.js';
 
 const UserInput = ({setData,value}) => {
     const [text,setText] = useState('');
@@ -68,13 +69,7 @@ const CreateReview = () => {
             const hasAllKeys = required.every(key=> Object.hasOwn(data,key));
             if (hasAllKeys) {
                 try {
-                    const response = await fetch('http://localhost:3000/reviews', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(data)
-                    });
-                    const d = await response.json();
-                    console.log(d);
+                    const response = await submitPayload(data);
                     if (response.ok) {
                         setSuccess(true);
 

@@ -27,6 +27,6 @@ nav a:hover {
 
 .nav-buttons {
     display: flex;
-    width: 200px;
+    width: 300px;
     justify-content: space-around;
 }

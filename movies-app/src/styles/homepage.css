@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.homepage-wrapper {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
 .hero {
     max-width: 800px;
     margin: 0 auto;

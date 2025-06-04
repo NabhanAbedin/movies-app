@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import likeBtn from '../images/thumbs-up.svg';
 import {useParams} from 'react-router-dom';
+import { likeRequest } from "../api/apiFunctions.js";
 
 const LikeButton = ({likes}) => {
     const [liked, setLiked] = useState(false);
@@ -9,13 +10,7 @@ const LikeButton = ({likes}) => {
 
     const sendLiked = async (liked) => {
         try {
-            const response = await fetch(`http://localhost:3000/likes/${id}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({liked: liked})
-            });
-            const result = await response.json();
-            console.log(result);
+            await likeRequest(liked,id);
         } catch (error) {
             console.log(error)
         };

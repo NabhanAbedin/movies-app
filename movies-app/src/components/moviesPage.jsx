@@ -2,14 +2,8 @@ import { useState, useEffect} from "react";
 import MoviesBox from "./MoviesBox";
 import Nav from "./Nav";
 import '../styles/moviesBox.css';
-
-const ErrorScreen = () => {
-    return (
-        <div className="error-container">
-            No content!
-        </div>
-    )
-}
+import ErrorScreen from "./Error";
+import { fetchReviews } from "../api/apiFunctions.js";
 
 const ReviewPage = () => {
     const [data,setData] = useState(null);
@@ -17,10 +11,8 @@ const ReviewPage = () => {
     useEffect(()=> {
             const fetchData = async () => {
             try {
-            const response = await fetch('http://localhost:3000/reviews');
-            const d = await response.json();
-            setData(d);
-            console.log(d);
+            const response = await fetchReviews();
+            setData(response);
             } catch (error) {
             console.log(error);
             };

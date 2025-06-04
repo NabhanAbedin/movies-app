@@ -84,11 +84,38 @@
   gap: 16px;
 }
 
+.comments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.comments-header h1 {
+  font-size: 1.5rem;
+  color: #222;
+  margin: 0;
+}
+
+.comments-header p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
 /* Input row styling */
 .comments-container > div:first-of-type {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.comments-input-container {
+    display: flex;
+    width: 600px;
+    gap: 20px;
 }
 
 .comments-container input {

@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import ReviewPage from './components/moviesPage';
 import CreateReview from './components/createReview';
 import MovieFullPage from './components/movieFullPage';
+import SearchMovie from './components/searchMovie';
 
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
             <Route path='/reviews' element={<ReviewPage/>} />
             <Route path='/create' element={<CreateReview/>} />
             <Route path='/movieReview/:id' element={<MovieFullPage/>} />
+            <Route path='/search' element={<SearchMovie/>} />
         </Routes>
     );
 };

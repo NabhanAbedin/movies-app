@@ -4,6 +4,7 @@ import '../styles/fullMoviePage.css';
 import Nav from './Nav';
 import Comments from './comments';
 import LikeButton from './likeButton';
+import { fetchMovie } from '../api/apiFunctions.js';
 
 
 const MovieFullPage = () => {
@@ -13,10 +14,8 @@ const MovieFullPage = () => {
     useEffect(()=> {
         const fetchData = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/movies/${id}`);
-                const d = await res.json();
-                console.log(d);
-                setData(d);
+                const result = await fetchMovie(id);
+                setData(result);
             } catch (error) {
                 console.log(error);
             }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { commentsPayload } from "../api/apiFunctions.js";
 
 const Comments = ({ id, data, setData}) => {
   const [text, setText] = useState('');
@@ -7,16 +7,9 @@ const Comments = ({ id, data, setData}) => {
 
   const commentSend = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/comments/${id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({comment: text })
-      });
-
-      const d = await response.json();
-      console.log(d);
+      const response = await commentsPayload(id,text);
      if (response.ok) {
-        console.log('ok');
+        console.log('comment sent');
        
      }
       
@@ -34,12 +27,16 @@ const Comments = ({ id, data, setData}) => {
   
   return (
     <div className="comments-container">
-      <h1>Comments</h1>
-      <div>
+      <div className="comments-header">
+       <h1>Comments</h1>
+       <p>{data.comments.length}</p>
+      </div>
+      <div className="comments-input-container">
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          placeholder="Comment your thoughts!"
         />
        <button onClick={() => { commentSend(); updateComments(); }}>Comment</button>
       </div>

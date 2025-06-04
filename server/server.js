@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
 
 
 const app = express();
@@ -26,7 +27,15 @@ const reviewSchema = new mongoose.Schema({
     likes: Number
 });
 
+const favoriteSchema = new mongoose.Schema({
+    title: String,
+    img: String,
+    overview: String
+});
+
 const Review = mongoose.model('Review', reviewSchema);
+
+const Favorite = mongoose.model('Favorite',favoriteSchema);
   
 app.get('/', (req, res) => {
 res.send('API is working');
@@ -127,8 +136,85 @@ app.post('/likes/:id', async (req,res)=> {
     } catch (error) {
         console.log('likes could not be done')
         res.status(400).json({ message: 'likes could not be found' });
+    };
+});
+
+app.get('/search', async (req,res)=> {
+    const {query} = req.query;
+    // this is where i get the query value from the http request
+    if (!query) {
+        res.status(404).json('No query was provided');
+    };
+
+    const apiKey = process.env.TMDB_API_KEY;
+    const tmdbUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+    //this is where it grabs the api key and creates the url
+
+    try {
+        const tmdbRes = await fetch(tmdbUrl);
+        if (!tmdbRes.ok) {
+            return res
+              .status(tmdbRes.status)
+              .json({ error: 'TMDb returned an error' });
+          };
+          const tmdbJson = await tmdbRes.json();
+
+          if (!Array.isArray(tmdbJson.results) || tmdbJson.results.length === 0) {
+            return res.json({ results: [] });
+          };
+
+          const results = tmdbJson.results.map((m)=> ({
+            id: m.id,
+            title: m.title,
+            overview: m.overview,
+            posterUrl: m.poster_path
+        ? `https://image.tmdb.org/t/p/w500${m.poster_path}`
+        : null,
+          }));
+          
+          console.log(results);
+          res.json({results});
+    } catch (error) {
+        console.error('Error calling TMDb:', error);
+    res.status(500).json({ error: 'Internal server error' });
+    };
+
+    
+});
+
+app.post('/favorites', async (req,res)=> {
+    console.log('/POST /favorites called');
+    const {title, img, overview} = req.body;
+    try {
+    
+        const newFavorite = new Favorite({
+            title: title,
+            img: img,
+            overview: overview
+        });
+        console.log(newFavorite);
+        await newFavorite.save();
+        res.status(201).json({ message: 'Favorite Added' });
+    } catch (error) {
+        console.log(error);
     }
-})
+
+});
+
+app.delete('/favorites', async (req,res)=> {
+    console.log('/DELETE /favorites called');
+    const {title} = req.body;
+
+    try {
+        const deletedFavorite = await Favorite.findOneAndDelete({title});
+    if (!deletedFavorite) {
+        return res.status(404).json({message:'could not delete favorite'});
+    };
+        return res.json({message: 'favorite removed'});
+    } catch (error) {
+        console.log(error);
+    };
+});
 
 app.listen(3000, () => {
 console.log('Server is started');
