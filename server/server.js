@@ -33,9 +33,23 @@ const favoriteSchema = new mongoose.Schema({
     overview: String
 });
 
+const LikesSchema = new mongoose.Schema({
+    title: String,
+    img: String,
+    release: String,
+    review: String,
+    comments: [{
+        user: String,
+        comment: String
+    }],
+    likes: Number
+})
+
 const Review = mongoose.model('Review', reviewSchema);
 
 const Favorite = mongoose.model('Favorite',favoriteSchema);
+
+const Like = mongoose.model('Like', LikesSchema)
   
 app.get('/', (req, res) => {
 res.send('API is working');
@@ -108,7 +122,7 @@ app.post('/comments/:id', async (req,res)=> {
     };
 });
 
-app.patch('/likes/:id', async (req,res)=> {
+app.patch('/comments/likes/:id', async (req,res)=> {
     console.log('/PATCH /likes called');
     try {
         const id = req.params.id;
@@ -136,6 +150,51 @@ app.patch('/likes/:id', async (req,res)=> {
     } catch (error) {
         console.log('likes could not be done')
         res.status(400).json({ message: 'likes could not be found' });
+    };
+});
+
+app.post('/likes/:id', async (req,res)=> {
+    console.log('/POST /likes called');
+
+    try {
+        const id = req.params.id;
+
+        const review = await Review.findById(id);
+
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+          };
+
+        const newLiked = new Like({
+            title: review.title,
+            img: review.img,
+            release: review.release,
+            review: review.review,
+            comments: review.comments,
+            likes: review.likes
+        });
+        await newLiked.save();
+
+        res.status(200).json({message: 'saved to like collection succesfully'});
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({message: 'could not add like'});
+    };
+});
+
+app.delete('/likes', async (req,res)=> {
+    console.log('/DELETE /likes called');
+    try {
+        const {title} = req.body;
+        const deletedLike = await Like.findOneAndDelete({title});
+        if (!deletedLike) {
+            res.status(404).json({message: 'could not delete like'});
+        };
+        res.status(200).json('deleted from like collection succesfully');
+
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({message: 'could not delete from like collection succesfully'});
     };
 });
 

@@ -42,7 +42,7 @@ const MovieFullPage = () => {
             </div>
         
         </div>
-        <LikeButton likes={data.likes}/>
+        <LikeButton data={data}/>
         <Comments id={id} data={data} setData={setData}/>
 
         </>

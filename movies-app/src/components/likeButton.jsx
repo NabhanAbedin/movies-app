@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import likeBtn from '../images/thumbs-up.svg';
 import {useParams} from 'react-router-dom';
-import { likeRequest } from "../api/apiFunctions.js";
+import { likeRequest, addlikeCollection, deleteLikeCollection } from "../api/apiFunctions.js";
 
-const LikeButton = ({likes}) => {
+const LikeButton = ({data}) => { 
+    const title = data.title;
+    const likes = data.likes;
+
     const [liked, setLiked] = useState(false);
     const [likeValue, setLikeValue] = useState(likes);
     const {id} = useParams();
+
 
     const sendLiked = async (liked) => {
         try {
@@ -16,15 +20,17 @@ const LikeButton = ({likes}) => {
         };
     };
 
-    const handleLike = () => {
+    const handleLike = async () => {
         const newLiked = !liked;
         if (liked) {
             setLiked(false);
             setLikeValue(likeValue - 1);
+            await deleteLikeCollection(title);
         
         } else {
             setLikeValue(likeValue + 1);
             setLiked(true)
+            await addlikeCollection(id);
             
         };
         sendLiked(newLiked);

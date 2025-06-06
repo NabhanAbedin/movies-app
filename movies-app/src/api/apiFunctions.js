@@ -54,10 +54,28 @@ export const searchRequest = async (text) => {
 };
 
 export const likeRequest = async (liked,id) => {
-    const response = await fetch(`http://localhost:3000/likes/${id}`, {
+    const response = await fetch(`http://localhost:3000/comments/likes/${id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({liked: liked})
+    });
+    const result = await response.json();
+    console.log(result);
+};
+
+export const addlikeCollection = async (id) => {
+    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
+        method: 'POST'
+    });
+    const result = await response.json();
+    console.log(result);
+};
+
+export const deleteLikeCollection = async (title) => {
+    const response =  await fetch(`http://localhost:3000/likes`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({title: title})
     });
     const result = await response.json();
     console.log(result);
