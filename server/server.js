@@ -108,8 +108,8 @@ app.post('/comments/:id', async (req,res)=> {
     };
 });
 
-app.post('/likes/:id', async (req,res)=> {
-    console.log('/POST /likes called');
+app.patch('/likes/:id', async (req,res)=> {
+    console.log('/PATCH /likes called');
     try {
         const id = req.params.id;
         const {liked} = req.body;
@@ -214,6 +214,12 @@ app.delete('/favorites', async (req,res)=> {
     } catch (error) {
         console.log(error);
     };
+});
+
+app.get('/favorites', async (req,res)=> {
+    console.log('/GET /favorites called');
+    const favorites = await Favorite.find();
+    res.json(favorites);
 });
 
 app.listen(3000, () => {

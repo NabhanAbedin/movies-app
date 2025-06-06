@@ -1,16 +1,8 @@
 import {Link} from 'react-router-dom';
+import { handleReviewLength } from '../api/apiFunctions.js';
 
 const MoviesBox = ({ data }) => {
   const sorted = data.sort((a,b)=> b.likes - a.likes);
-
-    const handleReviewLength = (review) => {
-      if (review.length > 100) {
-        const newReview = review.slice(0,150) + '...';
-        return newReview; 
-      } else {
-        return review;
-      };
-    };
   
     return (
       <>

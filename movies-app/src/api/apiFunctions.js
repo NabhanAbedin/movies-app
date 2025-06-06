@@ -1,3 +1,12 @@
+export const handleReviewLength = (review) => {
+    if (review.length > 100) {
+      const newReview = review.slice(0,150) + '...';
+      return newReview; 
+    } else {
+      return review;
+    };
+  };
+
 export const addFavorite = async (title,posterURL,overview) => {
         const response = await fetch('http://localhost:3000/favorites', {
             method: 'POST',
@@ -46,7 +55,7 @@ export const searchRequest = async (text) => {
 
 export const likeRequest = async (liked,id) => {
     const response = await fetch(`http://localhost:3000/likes/${id}`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({liked: liked})
     });
@@ -71,4 +80,11 @@ export const commentsPayload = async (id,text) => {
       const d = await response.json();
       console.log(d);
       return response;
-}
+};
+
+export const fetchFavorites = async () => {
+    const response = await fetch('http://localhost:3000/favorites');
+    const result = await response.json();
+    console.log(result);
+    return result;
+};
