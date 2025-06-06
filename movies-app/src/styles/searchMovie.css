@@ -1,17 +1,72 @@
-/* Modern Search Movie Styling */
+/* Modern Search Movie Styling with Fade-in Animations */
+
+/* Keyframe animations for fade-in effects */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Search container with fade-in animation */
 .search-container {
     margin-top: 50px;
     display: flex;
     justify-content: center;
     gap: 1rem;
     padding: 2rem;
-    /* Removed background and backdrop-filter */
     border-radius: 24px;
-    /* Removed box-shadow and border */
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2rem;
+    
+    /* Fade-in animation */
+    animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: both;
+}
+
+/* Initial hidden state for dynamic content */
+.search-container.hidden {
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .search-container input[type="text"] {
@@ -22,13 +77,17 @@
     border-radius: 16px;
     outline: none;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Removed background and backdrop-filter */
     font-weight: 500;
-    color: #000000; /* Changed to black */
+    color: #000000;
+    
+    /* Staggered fade-in animation */
+    animation: fadeInLeft 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
 }
 
 .search-container input[type="text"]::placeholder {
-    color: #000000; /* Changed to black */
+    color: #000000;
     font-weight: 400;
 }
 
@@ -36,7 +95,6 @@
     border-color: #667eea;
     box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
     transform: translateY(-2px);
-    /* Removed background */
 }
 
 .search-container button {
@@ -52,6 +110,11 @@
     box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
     position: relative;
     overflow: hidden;
+    
+    /* Staggered fade-in animation */
+    animation: fadeInScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
 }
 
 .search-container button::before {
@@ -79,7 +142,7 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-/* Movie Card Styling */
+/* Movie Card Styling with staggered fade-in */
 .movie-description {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
@@ -91,6 +154,26 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    
+    /* Fade-in animation for movie cards */
+    animation: staggerFadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: both;
+}
+
+/* Staggered animation delays for multiple movie cards */
+.movie-description:nth-child(1) { animation-delay: 0.1s; }
+.movie-description:nth-child(2) { animation-delay: 0.2s; }
+.movie-description:nth-child(3) { animation-delay: 0.3s; }
+.movie-description:nth-child(4) { animation-delay: 0.4s; }
+.movie-description:nth-child(5) { animation-delay: 0.5s; }
+.movie-description:nth-child(6) { animation-delay: 0.6s; }
+.movie-description:nth-child(n+7) { animation-delay: 0.7s; }
+
+/* Initial hidden state for dynamic movie cards */
+.movie-description.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: staggerFadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .movie-description::before {
@@ -112,7 +195,7 @@
 .movie-description:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
-    background: #f0f0f0; /* Light grey hover color */
+    background: #f0f0f0;
 }
 
 .movie-description img {
@@ -132,7 +215,7 @@
 .movie-description h2 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #000000; /* Changed to black */
+    color: #000000;
     margin: 1rem 0 0.75rem 0;
     line-height: 1.3;
 }
@@ -140,7 +223,7 @@
 .movie-description p {
     font-size: 1rem;
     line-height: 1.6;
-    color: #000000; /* Changed to black */
+    color: #000000;
     margin: 0 0 1.5rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -219,6 +302,23 @@
 .favorites-container button[style*="background-color: rgb(255, 87, 34)"]:hover {
     background: linear-gradient(135deg, #e64a19 0%, #ff5722 100%) !important;
     transform: translateY(-2px) scale(1.1);
+}
+
+/* Utility classes for JavaScript control */
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+.fade-in-delay-4 { animation-delay: 0.4s; }
+.fade-in-delay-5 { animation-delay: 0.5s; }
+
+/* Loading state animation */
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
 /* Responsive Design */
@@ -306,5 +406,14 @@
     .favorites-container button img {
         width: 16px;
         height: 16px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

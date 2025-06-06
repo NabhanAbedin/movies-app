@@ -5,12 +5,14 @@
     border-radius: 24px;
     margin: 2rem 0;
     margin-top: 70px;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .header-section {
     text-align: center;
     margin-bottom: 3rem;
     color: white;
+    animation: fadeInDown 0.6s ease-out 0.2s both;
 }
 
 .page-title {
@@ -50,7 +52,23 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     height: fit-content;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInCard 0.6s ease-out forwards;
 }
+
+/* Staggered animation for cards */
+.bento-card:nth-child(1) { animation-delay: 0.1s; }
+.bento-card:nth-child(2) { animation-delay: 0.2s; }
+.bento-card:nth-child(3) { animation-delay: 0.3s; }
+.bento-card:nth-child(4) { animation-delay: 0.4s; }
+.bento-card:nth-child(5) { animation-delay: 0.5s; }
+.bento-card:nth-child(6) { animation-delay: 0.6s; }
+.bento-card:nth-child(7) { animation-delay: 0.7s; }
+.bento-card:nth-child(8) { animation-delay: 0.8s; }
+.bento-card:nth-child(9) { animation-delay: 0.9s; }
+.bento-card:nth-child(10) { animation-delay: 1.0s; }
+.bento-card:nth-child(n+11) { animation-delay: 1.1s; }
 
 .bento-card:hover {
     transform: translateY(-4px) scale(1.01);
@@ -84,6 +102,8 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out 0.3s forwards;
 }
 
 .bento-card:hover .movie-poster img {
@@ -111,6 +131,9 @@
     color: #1e293b;
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInLeft 0.4s ease-out 0.4s forwards;
 }
 
 .movie-overview {
@@ -124,6 +147,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInLeft 0.4s ease-out 0.5s forwards;
 }
 
 /* Favorite Indicator */
@@ -132,8 +158,10 @@
     top: 1rem;
     right: 1rem;
     color: #ef4444;
-    opacity: 0.8;
+    opacity: 0;
     transition: all 0.3s ease;
+    transform: scale(0);
+    animation: popIn 0.3s ease-out 0.6s forwards;
 }
 
 .bento-card:hover .favorite-indicator {
@@ -147,11 +175,15 @@
     text-align: center;
     padding: 4rem 2rem;
     color: white;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.8s forwards;
 }
 
 .empty-icon {
     margin-bottom: 1.5rem;
     opacity: 0.6;
+    transform: scale(0.8);
+    animation: scaleIn 0.4s ease-out 1s forwards;
 }
 
 .empty-state h3 {
@@ -164,6 +196,80 @@
     font-size: 1rem;
     opacity: 0.8;
     margin: 0;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 /* Responsive Design */
@@ -223,5 +329,46 @@
 @media (min-width: 1200px) {
     .bento-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .overview-wrapper,
+    .header-section,
+    .bento-card,
+    .movie-poster img,
+    .movie-title,
+    .movie-overview,
+    .favorite-indicator,
+    .empty-state,
+    .empty-icon {
+        animation: none;
+        transition: none;
+    }
+    
+    .bento-card {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .movie-poster img,
+    .movie-title,
+    .movie-overview {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .favorite-indicator {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    
+    .empty-state {
+        opacity: 1;
+    }
+    
+    .empty-icon {
+        transform: scale(1);
     }
 }
