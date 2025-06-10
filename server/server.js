@@ -30,7 +30,8 @@ const reviewSchema = new mongoose.Schema({
 const favoriteSchema = new mongoose.Schema({
     title: String,
     img: String,
-    overview: String
+    overview: String,
+    release: String
 });
 
 const LikesSchema = new mongoose.Schema({
@@ -198,6 +199,17 @@ app.delete('/likes', async (req,res)=> {
     };
 });
 
+app.get('/likes', async (req,res)=> {
+   try {
+    const likes = await Like.find();
+    res.json(likes);
+   } catch (error) {
+    console.log(error);
+    res.status(404).json('could not find liked reviews');
+   }
+
+});
+
 app.get('/search', async (req,res)=> {
     const {query} = req.query;
     // this is where i get the query value from the http request
@@ -226,6 +238,7 @@ app.get('/search', async (req,res)=> {
             id: m.id,
             title: m.title,
             overview: m.overview,
+            release: m.release_date,
             posterUrl: m.poster_path
         ? `https://image.tmdb.org/t/p/w500${m.poster_path}`
         : null,

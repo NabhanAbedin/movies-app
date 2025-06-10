@@ -1,6 +1,6 @@
-import favoriteImg from '../images/favorite.png';
+import favoriteImg from '../../images/favorite.png';
 import { useState } from 'react';
-import { addFavorite, removeFavorite } from '../api/apiFunctions.js';
+import { addFavorite, removeFavorite } from '../../api/apiFunctions.js';
 
 
 

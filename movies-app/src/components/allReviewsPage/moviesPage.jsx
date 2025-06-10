@@ -1,9 +1,9 @@
 import { useState, useEffect} from "react";
-import MoviesBox from "./MoviesBox";
-import Nav from "./Nav";
-import '../styles/moviesBox.css';
-import ErrorScreen from "./Error";
-import { fetchReviews } from "../api/apiFunctions.js";
+import MoviesBox from "./MoviesBox.jsx";
+import Nav from "../Nav.jsx";
+import '../../styles/moviesBox.css';
+import ErrorScreen from "../Error.jsx";
+import { fetchReviews } from "../../api/apiFunctions.js";
 
 const ReviewPage = () => {
     const [data,setData] = useState(null);

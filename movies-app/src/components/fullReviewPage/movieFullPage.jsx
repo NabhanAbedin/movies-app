@@ -1,10 +1,10 @@
 import {useEffect,useState} from 'react';
 import {useParams} from 'react-router-dom';
-import '../styles/fullMoviePage.css';
-import Nav from './Nav';
-import Comments from './comments';
-import LikeButton from './likeButton';
-import { fetchMovie } from '../api/apiFunctions.js';
+import '../../styles/fullMoviePage.css';
+import Nav from '../Nav.jsx';
+import Comments from './comments.jsx';
+import LikeButton from './likeButton.jsx';
+import { fetchMovie } from '../../api/apiFunctions.js';
 
 
 const MovieFullPage = () => {

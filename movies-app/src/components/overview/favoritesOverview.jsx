@@ -1,10 +1,7 @@
-import Nav from "./Nav";
 import { useState, useEffect } from "react";
-import { fetchFavorites, handleReviewLength } from "../api/apiFunctions.js";
-import '../styles/overview.css';
+import { fetchFavorites, handleReviewLength } from "../../api/apiFunctions.js";
 
-
-const LikedOverview = () => {
+const FavoritesOverview = () => {
     const [data, setData] = useState(null);
 
     useEffect(()=> {
@@ -74,14 +71,4 @@ const LikedOverview = () => {
     );
 };
 
-const Overview = () => {
-
-    return (
-        <>
-            <Nav/>
-            <LikedOverview />
-        </>
-    );
-};
-
-export default Overview;
+export default FavoritesOverview;

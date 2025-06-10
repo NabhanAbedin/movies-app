@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { commentsPayload } from "../api/apiFunctions.js";
+import { commentsPayload } from "../../api/apiFunctions.js";
 
 const Comments = ({ id, data, setData}) => {
   const [text, setText] = useState('');

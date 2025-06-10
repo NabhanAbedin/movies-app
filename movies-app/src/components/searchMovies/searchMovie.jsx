@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Nav from "./Nav";
-import '../styles/searchMovie.css';
-import MovieDescription from "./movieDescription";
-import ErrorScreen from "./Error";
-import { searchRequest } from "../api/apiFunctions.js";
+import Nav from "../Nav.jsx";
+import '../../styles/searchMovie.css';
+import MovieDescription from "./movieDescription.jsx";
+import ErrorScreen from "../Error.jsx";
+import { searchRequest } from "../../api/apiFunctions.js";
 
 const SearchMovie = () => {
     const [text, setText] =  useState('');

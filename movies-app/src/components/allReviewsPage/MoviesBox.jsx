@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import { handleReviewLength } from '../api/apiFunctions.js';
+import { handleReviewLength } from '../../api/apiFunctions.js';
 
 const MoviesBox = ({ data }) => {
   const sorted = data.sort((a,b)=> b.likes - a.likes);

@@ -1,4 +1,4 @@
-import '../styles/movieDescription.css';
+import '../../styles/movieDescription.css';
 import MovieCard from './movieCard';
 
 const MovieDescription = ({ data, text }) => {

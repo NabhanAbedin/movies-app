@@ -1,10 +1,10 @@
 import {Routes, Route} from 'react-router-dom';
 import Home from "./components/Home";
-import ReviewPage from './components/moviesPage';
-import CreateReview from './components/createReview';
-import MovieFullPage from './components/movieFullPage';
-import SearchMovie from './components/searchMovie';
-import Overview from './components/overview';
+import ReviewPage from './components/allReviewsPage/moviesPage';
+import CreateReview from './components/createReview/createReview';
+import MovieFullPage from './components/fullReviewPage/movieFullPage';
+import SearchMovie from './components/searchMovies/searchMovie';
+import Overview from './components/overview/overview';
 
 
 const App = () => {

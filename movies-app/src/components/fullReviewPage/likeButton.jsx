@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import likeBtn from '../images/thumbs-up.svg';
+import likeBtn from '../../images/thumbs-up.svg';
 import {useParams} from 'react-router-dom';
-import { likeRequest, addlikeCollection, deleteLikeCollection } from "../api/apiFunctions.js";
+import { likeRequest, addlikeCollection, deleteLikeCollection } from "../../api/apiFunctions.js";
 
 const LikeButton = ({data}) => { 
     const title = data.title;

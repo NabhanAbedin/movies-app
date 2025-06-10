@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import Nav from './Nav';
-import '../styles/createReview.css';
-import { submitPayload } from '../api/apiFunctions.js';
+import Nav from '../Nav.jsx';
+import '../../styles/createReview.css';
+import { submitPayload } from '../../api/apiFunctions.js';
 
 const UserInput = ({setData,value}) => {
     const [text,setText] = useState('');
