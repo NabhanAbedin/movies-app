@@ -7,11 +7,11 @@ export const handleReviewLength = (review) => {
     };
   };
 
-export const addFavorite = async (title,posterURL,overview) => {
+export const addFavorite = async (title,posterURL,overview, release) => {
         const response = await fetch('http://localhost:3000/favorites', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({title: title, img: posterURL, overview: overview})
+            body: JSON.stringify({title: title, img: posterURL, overview: overview, release: release})
         });
         const result = await response.json();
         console.log(result);

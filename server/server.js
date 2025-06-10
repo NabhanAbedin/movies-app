@@ -256,13 +256,14 @@ app.get('/search', async (req,res)=> {
 
 app.post('/favorites', async (req,res)=> {
     console.log('/POST /favorites called');
-    const {title, img, overview} = req.body;
+    const { title, img, overview, release } = req.body;
     try {
     
         const newFavorite = new Favorite({
             title: title,
             img: img,
-            overview: overview
+            overview: overview,
+            release: release
         });
         console.log(newFavorite);
         await newFavorite.save();
@@ -291,6 +292,7 @@ app.delete('/favorites', async (req,res)=> {
 app.get('/favorites', async (req,res)=> {
     console.log('/GET /favorites called');
     const favorites = await Favorite.find();
+    console.log(favorites);
     res.json(favorites);
 });
 

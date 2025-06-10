@@ -578,6 +578,18 @@
     opacity: 0.8;
 }
 
+/* Movie Release Date Styling */
+.movie-release {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInLeft 0.4s ease-out 0.45s forwards;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .overview-header {

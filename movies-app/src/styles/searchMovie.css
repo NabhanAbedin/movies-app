@@ -321,6 +321,19 @@
     animation: pulse 1.5s ease-in-out infinite;
 }
 
+.movie-description .release-date {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+    margin: 0.5rem 0 1rem 0;
+    padding: 0.25rem 0.75rem;
+    background: rgba(100, 116, 139, 0.1);
+    border-radius: 12px;
+    display: inline-block;
+    border: 1px solid rgba(100, 116, 139, 0.15);
+    transition: all 0.3s ease;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .search-container {

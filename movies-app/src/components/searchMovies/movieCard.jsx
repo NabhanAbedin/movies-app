@@ -4,7 +4,7 @@ import { addFavorite, removeFavorite } from '../../api/apiFunctions.js';
 
 
 
-const MovieCard = ({posterURL,title,overview,handleReviewLength}) => {
+const MovieCard = ({posterURL,title,overview,handleReviewLength, release}) => {
     const [favorite, setFavorite] = useState(false);
 
     const handleClick = async () => {
@@ -14,7 +14,7 @@ const MovieCard = ({posterURL,title,overview,handleReviewLength}) => {
             
         } else {
             setFavorite(true);
-            await addFavorite(title,posterURL,overview);
+            await addFavorite(title,posterURL,overview, release);
         };
     };
    
@@ -24,6 +24,7 @@ const MovieCard = ({posterURL,title,overview,handleReviewLength}) => {
           <img src={posterURL} alt={title} />
           <h2>{title}</h2>
           <p>{handleReviewLength(overview)}</p>
+          <p className='release-date'>relase: {release}</p>
          <div className='favorites-container'>
          <button onClick={handleClick} style={favorite ? { backgroundColor: '#ff5722' } : {}}>
              <img src={favoriteImg} alt="" />

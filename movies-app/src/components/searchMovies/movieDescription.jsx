@@ -20,8 +20,8 @@ const MovieDescription = ({ data, text }) => {
          <h1>Results for: {text}</h1>
         </div>
         <div className="movie-grid">
-        {data.map(({ title, posterURL, overview, id }) => (
-          <MovieCard key={id} posterURL={posterURL} title={title} overview={overview} handleReviewLength={handleReviewLength} />
+        {data.map(({ title, posterUrl, overview, id, release }) => (
+          <MovieCard key={id} posterURL={posterUrl} title={title} overview={overview} handleReviewLength={handleReviewLength} release={release} />
         ))}
         </div>
      

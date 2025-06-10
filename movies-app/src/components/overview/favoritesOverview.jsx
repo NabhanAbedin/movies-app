@@ -26,7 +26,7 @@ const FavoritesOverview = () => {
             </div>
             
             <div className="bento-grid">
-                {data && data.map(({ title, img, overview, _id }, index) => (
+                {data && data.map(({ title, img, overview, _id, release}, index) => (
                     <div key={_id} className={`bento-card card-${(index % 6) + 1}`}>
                         <div className="card-content">
                             <div className="movie-poster">
@@ -45,6 +45,7 @@ const FavoritesOverview = () => {
                             <div className="movie-info">
                                 <h3 className="movie-title">{title}</h3>
                                 <p className="movie-overview">{handleReviewLength(overview)}</p>
+                                <p className="movie-release">release : {release}</p>
                             </div>
                             <div className="favorite-indicator">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
