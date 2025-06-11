@@ -1,230 +1,358 @@
-/* Make the entire component take up full viewport height */
+/* Modern Movie Page Layout - Main content updated, like button and comments kept original */
 .full-movie-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr;
-  height: 100vh;
-  gap: 16px;
-  padding: 32px;
-  box-sizing: border-box;
-  margin-top: 50px;
-}
-
-/* Left side: image and release info */
-.img-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-  border-radius: 12px;
-  padding: 16px;
-  grid-column: 1 / 2;
-  height: 100%;
-}
-
-.img-container img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-  margin-bottom: 16px;
-}
-
-.img-container p {
-  font-size: 1.25rem;
-  color: #555;
-  margin: 0;
-}
-
-/* Right side: title and review text */
-.details-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 32px;
-  grid-column: 2 / 3;
-}
-
-.title-container {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  color: #222;
-}
-
-.review-header {
-  font-size: 2rem;
-  margin: 16px 0 8px;
-  color: #444;
-}
-.info-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 24px;
-  flex-grow: 1;
-  align-items: start;
-}
-
-.textContainer {
-  font-size: 1.0rem;
-  line-height: 1.6;
-  color: #333;
-  overflow-y: auto;
-}
-
-.comments-container {
-  margin-top: 30px;
-  background-color: #f0f0f0; /* light gray */
-  padding: 24px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.comments-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
-}
-
-.comments-header h1 {
-  font-size: 1.5rem;
-  color: #222;
-  margin: 0;
-}
-
-.comments-header p {
-  font-size: 1rem;
-  color: #666;
-  margin: 0;
-}
-
-/* Input row styling */
-.comments-container > div:first-of-type {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.comments-input-container {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    gap: 32px;
+    padding: 40px;
+    box-sizing: border-box;
+    margin-top: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin-bottom: 20px;
+    /* Removed width: 100vw and margin overrides */
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Left side: Poster with glassmorphism effect */
+  .img-container {
     display: flex;
-    width: 600px;
-    gap: 20px;
-}
-
-.comments-container input {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: white;
-}
-
-.comments-container input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-/* Comment button styling */
-.comments-container button {
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.comments-container button:hover {
-  background-color: #0056b3;
-}
-
-/* Individual comment cards */
-.comment-container {
-  background-color: white;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.comment-container h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.comment-container p {
-  font-size: 0.95rem;
-  color: #555;
-  margin: 0;
-}
-
-
-.like-wrapper {
-    padding-right: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 32px;
+    grid-column: 1 / 2;
+    height: fit-content;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Removed margin-left: 40px as padding handles spacing now */
+  }
+  
+  .img-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .img-container img:hover {
+    transform: scale(1.02);
+  }
+  
+  .img-container p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Right side: Content area */
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+    grid-column: 2 / 3;
+    gap: 32px;
+    /* Removed padding-right as wrapper padding handles it */
+  }
+  
+  .title-container {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.1;
+  }
+  
+  .review-header {
+    font-size: 2.5rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    position: relative;
+  }
+  
+  .review-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    border-radius: 2px;
+  }
+  
+  .textContainer {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 32px;
+    overflow-y: auto;
+    max-height: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Custom scrollbar for review text */
+  .textContainer::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .textContainer::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  .textContainer::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+  
+  .textContainer::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .info-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    flex-grow: 1;
+    align-items: start;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .full-movie-wrapper {
+      grid-template-columns: 350px 1fr;
+      gap: 24px;
+      padding: 32px;
+    }
+    
+    .title-container {
+      font-size: 3rem;
+    }
+  }
+  
+  @media (max-width: 968px) {
+    .full-movie-wrapper {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      height: auto;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    
+    .img-container {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      flex-direction: row;
+      height: auto;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .img-container img {
+      width: 200px;
+      height: 300px;
+      margin-bottom: 0;
+    }
+    
+    .details-container {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    
+    .title-container {
+      font-size: 2.5rem;
+    }
+  }
+  
+  /* Add to body to prevent any horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* ORIGINAL LIKE BUTTON AND COMMENTS CSS BELOW - UNCHANGED */
+  
+  .like-wrapper {
+      padding-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  }
+  .like-button-container {
+    width: 70px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-}
-.like-button-container {
-  width: 70px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.like-button-container.active {
-  background-color: #ff5722;  /* vibrant accent, e.g. deep orange */
-}
-.like-button-container.active p {
-  color: #ffffff;            /* ensure the count is white on orange */
-}
-.like-button-container.active img {
-  filter: brightness(0) saturate(100%) invert(100%);
-}
-
-.like-button-container:hover {
-  background-color: #e0e0e0;
-}
-
-/* Button resets for the icon */
-.like-button-container img {
-  width: 25px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-}
-
-/* Thumbs-up icon size */
-.like-button-container button img {
-  width: 24px;
-  height: 24px;
-}
-
-/* Like count styling */
-.like-button-container p {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #333333;
-}
+    justify-content: center;
+  }
+  
+  .like-button-container.active {
+    background-color: #ff5722;  /* vibrant accent, e.g. deep orange */
+  }
+  .like-button-container.active p {
+    color: #ffffff;            /* ensure the count is white on orange */
+  }
+  .like-button-container.active img {
+    filter: brightness(0) saturate(100%) invert(100%);
+  }
+  
+  .like-button-container:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Button resets for the icon */
+  .like-button-container img {
+    width: 25px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Thumbs-up icon size */
+  .like-button-container button img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Like count styling */
+  .like-button-container p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333333;
+  }
+  
+  .comments-container {
+    margin-top: 30px;
+    background-color: #f0f0f0; /* light gray */
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .comments-header h1 {
+    font-size: 1.5rem;
+    color: #222;
+    margin: 0;
+  }
+  
+  .comments-header p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  /* Input row styling */
+  .comments-container > div:first-of-type {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .comments-input-container {
+      display: flex;
+      width: 600px;
+      gap: 20px;
+  }
+  
+  .comments-container input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+  }
+  
+  .comments-container input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Comment button styling */
+  .comments-container button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .comments-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Individual comment cards */
+  .comment-container {
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .comment-container h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .comment-container p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0;
+  }

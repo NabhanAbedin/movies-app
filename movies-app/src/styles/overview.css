@@ -1,4 +1,4 @@
-/* Modern Bento-Style Movie Favorites */
+/* Modern Bento-Style Movie Favorites - Fixed Height Version */
 .overview-wrapper {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem;
@@ -32,17 +32,17 @@
     font-weight: 400;
 }
 
-/* Bento Grid Layout */
+/* Bento Grid Layout - Fixed for equal heights */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
     max-width: 1400px;
     margin: 0 auto;
-    grid-auto-rows: auto;
+    grid-auto-rows: 1fr; /* This ensures all rows have equal height */
 }
 
-/* Card Styling */
+/* Card Styling - Fixed height structure */
 .bento-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
@@ -51,7 +51,10 @@
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    height: fit-content;
+    /* Remove height: fit-content and let grid control height */
+    display: flex;
+    flex-direction: column; /* Enable flex layout for content distribution */
+    min-height: 320px; /* Minimum height for consistency */
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInCard 0.6s ease-out forwards;
@@ -81,6 +84,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    flex: 1; /* Allow content to fill available space */
+    min-height: 0; /* Allow flex children to shrink */
 }
 
 /* Movie Poster */
@@ -117,9 +122,9 @@
     justify-content: center;
 }
 
-/* Movie Info */
+/* Movie Info - Modified for consistent layout */
 .movie-info {
-    flex-grow: 1;
+    flex: 1; /* Take up remaining space */
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -134,13 +139,25 @@
     opacity: 0;
     transform: translateX(-10px);
     animation: fadeInLeft 0.4s ease-out 0.4s forwards;
+    flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.movie-release {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInLeft 0.4s ease-out 0.45s forwards;
+    flex-shrink: 0; /* Prevent release date from shrinking */
 }
 
 .movie-overview {
     font-size: 0.875rem;
     line-height: 1.5;
     color: #64748b;
-    margin: 0;
+    margin: 0 0 auto 0; /* Push other content to bottom with auto margin */
     display: -webkit-box;
     -webkit-line-clamp: 4;
     line-clamp: 4;
@@ -150,6 +167,22 @@
     opacity: 0;
     transform: translateX(-10px);
     animation: fadeInLeft 0.4s ease-out 0.5s forwards;
+    flex: 1; /* Allow overview to grow and fill space */
+    min-height: 0; /* Allow shrinking if needed */
+}
+
+/* Review Actions Section - Fixed position */
+.review-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s ease-out 0.6s forwards;
+    flex-shrink: 0; /* Prevent actions from shrinking */
 }
 
 /* Favorite Indicator */
@@ -272,108 +305,6 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .overview-wrapper {
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-    }
-    
-    .bento-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .card-content {
-        padding: 1.25rem;
-    }
-    
-    .movie-poster {
-        width: 60px;
-        height: 90px;
-    }
-    
-    .movie-title {
-        font-size: 1.125rem;
-    }
-    
-    .movie-overview {
-        font-size: 0.875rem;
-        -webkit-line-clamp: 4;
-        line-clamp: 4;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-section {
-        margin-bottom: 2rem;
-    }
-    
-    .page-title {
-        font-size: 2rem;
-    }
-    
-    .page-subtitle {
-        font-size: 1rem;
-    }
-}
-
-/* Masonry-style layout for larger screens */
-@media (min-width: 769px) {
-    .bento-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        grid-auto-rows: auto;
-    }
-}
-
-@media (min-width: 1200px) {
-    .bento-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .overview-wrapper,
-    .header-section,
-    .bento-card,
-    .movie-poster img,
-    .movie-title,
-    .movie-overview,
-    .favorite-indicator,
-    .empty-state,
-    .empty-icon {
-        animation: none;
-        transition: none;
-    }
-    
-    .bento-card {
-        opacity: 1;
-        transform: none;
-    }
-    
-    .movie-poster img,
-    .movie-title,
-    .movie-overview {
-        opacity: 1;
-        transform: none;
-    }
-    
-    .favorite-indicator {
-        opacity: 0.8;
-        transform: scale(1);
-    }
-    
-    .empty-state {
-        opacity: 1;
-    }
-    
-    .empty-icon {
-        transform: scale(1);
-    }
-}
-
-
 /* Additional styles for LikesOverview component */
 
 /* Movie Release Date */
@@ -385,27 +316,9 @@
     margin-top: 70px;
     animation: fadeInUp 0.8s ease-out;
 }
-.movie-release {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin: 0 0 0.5rem 0;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateX(-10px);
-    animation: fadeInLeft 0.4s ease-out 0.45s forwards;
-}
 
-/* Review Actions Section */
-.review-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 0.4s ease-out 0.6s forwards;
+.likes-overview-wrapper a {
+    text-decoration: none;
 }
 
 /* Like Button */
@@ -453,7 +366,7 @@
     height: 24px;
 }
 
- .like-button:hover .thumbs-up-container img {
+.like-button:hover .thumbs-up-container img {
     opacity: 1;
     transform: scale(1.1);
 }
@@ -497,61 +410,6 @@
     }
 }
 
-/* Responsive Design Updates */
-@media (max-width: 768px) {
-    .review-actions {
-        margin-top: 0.75rem;
-        padding-top: 0.75rem;
-    }
-    
-    .like-button {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
-        gap: 0.4rem;
-    }
-    
-    .thumbs-up-placeholder {
-        width: 14px;
-        height: 14px;
-    }
-    
-    .movie-release {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .like-button {
-        padding: 0.35rem 0.5rem;
-        font-size: 0.75rem;
-        gap: 0.3rem;
-    }
-    
-    .thumbs-up-placeholder {
-        width: 12px;
-        height: 12px;
-    }
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .movie-release,
-    .review-actions {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
-    
-    .thumbs-up-placeholder::after {
-        animation: none;
-    }
-    
-    .like-button:hover .thumbs-up-placeholder,
-    .like-button:hover .likes-count {
-        transform: none;
-    }
-}
-
 /* Overview Header Styling */
 .overview-header {
     padding: 2rem 2rem 1rem 2rem;
@@ -582,20 +440,66 @@
     opacity: 0.8;
 }
 
-/* Movie Release Date Styling */
-.movie-release {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin: 0 0 0.5rem 0;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateX(-10px);
-    animation: fadeInLeft 0.4s ease-out 0.45s forwards;
-}
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
+    .overview-wrapper {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .bento-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .bento-card {
+        min-height: 280px; /* Smaller min-height for mobile */
+    }
+    
+    .card-content {
+        padding: 1.25rem;
+    }
+    
+    .movie-poster {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .movie-title {
+        font-size: 1.125rem;
+    }
+    
+    .movie-overview {
+        font-size: 0.875rem;
+        -webkit-line-clamp: 3; /* Fewer lines on mobile */
+        line-clamp: 3;
+    }
+    
+    .review-actions {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+    }
+    
+    .like-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        gap: 0.4rem;
+    }
+    
+    .thumbs-up-container {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .thumbs-up-container img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .movie-release {
+        font-size: 0.7rem;
+    }
+    
     .overview-header {
         padding: 1.5rem 1.5rem 1rem 1.5rem;
         margin-top: 60px;
@@ -611,6 +515,38 @@
 }
 
 @media (max-width: 480px) {
+    .header-section {
+        margin-bottom: 2rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .bento-card {
+        min-height: 260px; /* Even smaller for very small screens */
+    }
+    
+    .like-button {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.75rem;
+        gap: 0.3rem;
+    }
+    
+    .thumbs-up-container {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .thumbs-up-container img {
+        width: 18px;
+        height: 18px;
+    }
+    
     .overview-header {
         padding: 1rem 1rem 0.75rem 1rem;
         margin-top: 50px;
@@ -625,8 +561,82 @@
     }
 }
 
+/* Masonry-style layout for larger screens */
+@media (min-width: 769px) {
+    .bento-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-auto-rows: 1fr; /* Maintain equal heights */
+    }
+    
+    .bento-card {
+        min-height: 340px; /* Larger min-height for desktop */
+    }
+}
+
+@media (min-width: 1200px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 1fr; /* Maintain equal heights */
+    }
+    
+    .bento-card {
+        min-height: 360px; /* Even larger for wide screens */
+    }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
+    .overview-wrapper,
+    .header-section,
+    .bento-card,
+    .movie-poster img,
+    .movie-title,
+    .movie-overview,
+    .movie-release,
+    .review-actions,
+    .favorite-indicator,
+    .empty-state,
+    .empty-icon {
+        animation: none;
+        transition: none;
+    }
+    
+    .bento-card {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .movie-poster img,
+    .movie-title,
+    .movie-overview,
+    .movie-release,
+    .review-actions {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .favorite-indicator {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    
+    .empty-state {
+        opacity: 1;
+    }
+    
+    .empty-icon {
+        transform: scale(1);
+    }
+    
+    .thumbs-up-placeholder::after {
+        animation: none;
+    }
+    
+    .like-button:hover .thumbs-up-container,
+    .like-button:hover .likes-count {
+        transform: none;
+    }
+    
     .overview-header {
         animation: none;
     }

@@ -40,6 +40,7 @@ const LikesOverview = () => {
                 {data && data.map(({ title, img, release, review, likes, _id, reviewId }, index) => (
                     <div key={_id} className={`bento-card card-${(index % 6) + 1}`}>
                         <div className="card-content">
+                        <Link  to={`/movieReview/${reviewId}`}>
                             <div className="movie-poster">
                                 {img ? (
                                     <img src={img} alt={title} />
@@ -60,6 +61,7 @@ const LikesOverview = () => {
                                 )}
                                 <p className="movie-overview">{handleReviewLength(review)}</p>
                             </div>
+                            </Link>
                             <div className="review-actions">
                                 <button className="like-button">
                                     <div className="thumbs-up-container" onClick={()=> {handleLikeClick(title,reviewId)}}>
