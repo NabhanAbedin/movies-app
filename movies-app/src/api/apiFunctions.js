@@ -53,33 +53,34 @@ export const searchRequest = async (text) => {
     return result;
 };
 
-export const likeRequest = async (liked,id) => {
-    const response = await fetch(`http://localhost:3000/comments/likes/${id}`, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({liked: liked})
-    });
-    const result = await response.json();
-    console.log(result);
-};
-
 export const addlikeCollection = async (id) => {
-    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
+    const response =  await fetch(`http://localhost:3000/comments/likes/${id}`, {
         method: 'POST'
     });
     const result = await response.json();
     console.log(result);
+    return response;
 };
 
-export const deleteLikeCollection = async (title) => {
-    const response =  await fetch(`http://localhost:3000/likes`, {
+export const deleteLikeCollection = async (title,id) => {
+    const response =  await fetch(`http://localhost:3000/comments/likes/${id}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({title: title})
     });
     const result = await response.json();
     console.log(result);
+    return response;
 };
+
+export const checkLiked = async (id) => {
+    const response =  await fetch(`http://localhost:3000/overview/likes/${id}`, {
+        method: 'GET',
+    });
+    const result = await response.json();
+    return result.isLiked;
+
+}
 
 export const fetchMovie = async (id) => {
     const res = await fetch(`http://localhost:3000/movies/${id}`);

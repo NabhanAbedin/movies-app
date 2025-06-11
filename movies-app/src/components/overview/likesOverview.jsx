@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchLikes, handleReviewLength } from "../../api/apiFunctions.js";
+import likeBtn from '../../images/thumbs-up.svg';
+import { deleteLikeCollection } from "../../api/apiFunctions.js";
+import { Link } from "react-router-dom";
 
 const LikesOverview = () => {
     const [data, setData] = useState(null);
@@ -15,7 +18,14 @@ const LikesOverview = () => {
             
         };
         fetchData();
-    }, [])
+    }, []);
+
+    const handleLikeClick = async (title, id) => {
+            const res = await deleteLikeCollection(title,id);
+            if (res.ok) {
+                setData(prev => prev.filter(data => data.title != title));
+            };
+    };
 
     return (
         <div className="likes-overview-wrapper">
@@ -27,7 +37,7 @@ const LikesOverview = () => {
             </div>
                      
             <div className="bento-grid">
-                {data && data.map(({ title, img, release, review, likes, _id }, index) => (
+                {data && data.map(({ title, img, release, review, likes, _id, reviewId }, index) => (
                     <div key={_id} className={`bento-card card-${(index % 6) + 1}`}>
                         <div className="card-content">
                             <div className="movie-poster">
@@ -52,8 +62,8 @@ const LikesOverview = () => {
                             </div>
                             <div className="review-actions">
                                 <button className="like-button">
-                                    <div className="thumbs-up-placeholder">
-                                        {/* Placeholder for thumbs up icon */}
+                                    <div className="thumbs-up-container" onClick={()=> {handleLikeClick(title,reviewId)}}>
+                                       <img src={likeBtn} alt="" />
                                     </div>
                                     <span className="likes-count">{likes || 0}</span>
                                 </button>

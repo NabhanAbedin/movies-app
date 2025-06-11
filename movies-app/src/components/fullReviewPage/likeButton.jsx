@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import likeBtn from '../../images/thumbs-up.svg';
 import {useParams} from 'react-router-dom';
-import { likeRequest, addlikeCollection, deleteLikeCollection } from "../../api/apiFunctions.js";
+import { addlikeCollection, deleteLikeCollection, checkLiked } from "../../api/apiFunctions.js";
 
 const LikeButton = ({data}) => { 
     const title = data.title;
@@ -11,29 +11,45 @@ const LikeButton = ({data}) => {
     const [likeValue, setLikeValue] = useState(likes);
     const {id} = useParams();
 
+    useEffect(()=> {
+        const fetchData = async () => {
+            try {
+                const result = await checkLiked(id);
 
-    const sendLiked = async (liked) => {
-        try {
-            await likeRequest(liked,id);
-        } catch (error) {
-            console.log(error)
+                if (result) {
+                    setLiked(true);
+                };
+            } catch (error) {
+                console.log(error);
+            };
         };
-    };
+        fetchData();
+    },[])
+
 
     const handleLike = async () => {
-        const newLiked = !liked;
-        if (liked) {
-            setLiked(false);
-            setLikeValue(likeValue - 1);
-            await deleteLikeCollection(title);
-        
-        } else {
-            setLikeValue(likeValue + 1);
-            setLiked(true)
-            await addlikeCollection(id);
+         try {
+            if (liked) {
+                const res = await deleteLikeCollection(title,id);
+                
+                if (res.ok) {
+                    setLiked(false);
+                    setLikeValue(likeValue - 1);
+                }
+                
             
-        };
-        sendLiked(newLiked);
+            } else {
+                const res =  await addlikeCollection(id);
+                if (res.ok) {
+                    setLikeValue(likeValue + 1);
+                    setLiked(true)
+                };
+                
+                
+            };
+        } catch (error) {
+            console.log(error);
+        }
         console.log(liked);
     };
 
