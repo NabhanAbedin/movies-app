@@ -2,30 +2,21 @@ import {useState} from 'react';
 import Nav from '../Nav.jsx';
 import '../../styles/createReview.css';
 import { submitPayload } from '../../api/apiFunctions.js';
+import SearchBar from './searchBar.jsx';
 
 const UserInput = ({setData,value}) => {
-    const [text,setText] = useState('');
+    //const [text,setText] = useState('');
 
-    const handleType = (e) => {
-       const newVal = e.target.value;
-       setText(newVal)
-        setData(prev => ({ ...prev, [value]: newVal }));
-    }
+   // const handleType = (e) => {
+       //const newVal = e.target.value;
+       //setText(newVal)
+       // setData(prev => ({ ...prev, [value]: newVal }));
+   // }
 
     return (
-        <div className='input-container'>
-            <h1>Enter {value}</h1>
-            <div className="input-row">
-              <input
-                type="text"
-                value={text}
-                placeholder={value}
-                onChange={handleType}
-                style={{
-                  border: text ? '2px solid green' : '2px solid gray'
-                }}
-              />
-            </div>
+        <div>
+          <h1>Enter your Movie!</h1>
+          <SearchBar placeholder={'title'}/>
         </div>
     );
 };
@@ -90,8 +81,7 @@ const CreateReview = () => {
                 <Nav/>
                 <div className='inputs-container'>
                 <h1>Create Your Review!</h1>
-                <UserInput setData={setData} value={'title'}/>
-                <UserInput setData={setData} value={'release'}/>
+                 <UserInput />
                 <ReviewInput setData={setData} />
                 <div className='publish-container'>
                 <h1>Publish Your Review!</h1>

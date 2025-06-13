@@ -109,8 +109,8 @@ export const fetchFavorites = async () => {
     return result;
 };
 
-export const checkFavorited = async (title) => {
-    const response = await fetch(`http://localhost:3000/search/favorites/${encodeURIComponent(title)}`, {
+export const checkFavorited = async (title,release) => {
+    const response = await fetch(`http://localhost:3000/search/favorites?title=${encodeURIComponent(title)}&release=${encodeURIComponent(release)}`, {
         method: 'GET'
     });
     const result = await response.json();

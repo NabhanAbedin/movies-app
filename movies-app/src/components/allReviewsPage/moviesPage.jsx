@@ -2,7 +2,7 @@ import { useState, useEffect} from "react";
 import MoviesBox from "./MoviesBox.jsx";
 import Nav from "../Nav.jsx";
 import '../../styles/moviesBox.css';
-import ErrorScreen from "../Error.jsx";
+import Loading from "../loading.jsx";
 import { fetchReviews } from "../../api/apiFunctions.js";
 
 const ReviewPage = () => {
@@ -24,7 +24,7 @@ const ReviewPage = () => {
        <>
        <Nav/>
        <div className="reviews-container">
-        {data ? <MoviesBox data={data}/> : <ErrorScreen />}
+        {data ? <MoviesBox data={data}/> : <Loading />}
        </div>
        </>
 

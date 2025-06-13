@@ -315,9 +315,9 @@ app.get('/favorites', async (req,res)=> {
 app.get('/search/favorites', async (req,res)=> {
     console.log('/GET /search/favorites called');
     try  {
-        const {title} = req.query;
+        const {title, release} = req.query;
 
-        const isFavorited = await Favorite.findOne({title});
+        const isFavorited = await Favorite.findOne({title: title, release: release});
 
         if (isFavorited) {
             return res.json({isFavorited: true});

@@ -9,7 +9,7 @@ const MovieCard = ({posterURL,title,overview,handleReviewLength, release}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await checkFavorited(title);
+            const result = await checkFavorited(title,release);
             if (result) {
                 setFavorite(true);
             };

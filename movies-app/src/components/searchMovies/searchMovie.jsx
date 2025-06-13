@@ -2,7 +2,7 @@ import { useState } from "react";
 import Nav from "../Nav.jsx";
 import '../../styles/searchMovie.css';
 import MovieDescription from "./movieDescription.jsx";
-import ErrorScreen from "../Error.jsx";
+import Loading from "../loading.jsx";
 import { searchRequest } from "../../api/apiFunctions.js";
 
 const SearchMovie = () => {
@@ -33,7 +33,7 @@ const SearchMovie = () => {
         <>  
             <Nav />
             <div className="search-container">
-                <input type="text" value={text} onChange={(e)=> setText(e.target.value)} placeholder="Search Movie!" onKeyDown={handleKeyDown}/>
+                <input type="search" value={text} onChange={(e)=> setText(e.target.value)} placeholder="Search Movie!" onKeyDown={handleKeyDown}/>
                 <button onClick={handleSearch}>Search</button>
             </div>
             {data && <MovieDescription data={data} text={text} /> }
