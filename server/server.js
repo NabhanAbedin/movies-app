@@ -255,7 +255,7 @@ app.get('/search', async (req,res)=> {
         : null,
           }));
           
-          console.log(results);
+          //console.log(results);
           res.json({results});
     } catch (error) {
         console.error('Error calling TMDb:', error);
@@ -269,7 +269,12 @@ app.post('/favorites', async (req,res)=> {
     console.log('/POST /favorites called');
     const { title, img, overview, release } = req.body;
     try {
-    
+        const alreadyFavorited = await Favorite.findOne({title});
+
+        if (alreadyFavorited) {
+            return res.status(409).json('already favorited');
+        };
+
         const newFavorite = new Favorite({
             title: title,
             img: img,
@@ -306,6 +311,26 @@ app.get('/favorites', async (req,res)=> {
     console.log(favorites);
     res.json(favorites);
 });
+
+app.get('/search/favorites', async (req,res)=> {
+    console.log('/GET /search/favorites called');
+    try  {
+        const {title} = req.query;
+
+        const isFavorited = await Favorite.findOne({title});
+
+        if (isFavorited) {
+            return res.json({isFavorited: true});
+        } else {
+            return res.json({isFavorited: false});
+        };
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+})
 
 app.listen(3000, () => {
 console.log('Server is started');

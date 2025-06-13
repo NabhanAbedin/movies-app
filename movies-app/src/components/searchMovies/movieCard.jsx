@@ -1,11 +1,21 @@
 import favoriteImg from '../../images/favorite.png';
-import { useState } from 'react';
-import { addFavorite, removeFavorite } from '../../api/apiFunctions.js';
+import { useState, useEffect } from 'react';
+import { addFavorite, removeFavorite, checkFavorited } from '../../api/apiFunctions.js';
 
 
 
 const MovieCard = ({posterURL,title,overview,handleReviewLength, release}) => {
     const [favorite, setFavorite] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await checkFavorited(title);
+            if (result) {
+                setFavorite(true);
+            };
+        };
+        fetchData();
+    },[])
 
     const handleClick = async () => {
         if (favorite) {

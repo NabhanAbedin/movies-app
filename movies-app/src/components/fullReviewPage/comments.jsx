@@ -20,6 +20,13 @@ const Comments = ({ id, data, setData}) => {
     
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key==='Enter') {
+       updateComments();
+       commentSend();
+    };
+};
+
   const updateComments = () => {
     setData(prev => ({...prev, comments: [...prev.comments, {user: 'anonymous',comment: text} ]}));
     setText('');
@@ -36,6 +43,7 @@ const Comments = ({ id, data, setData}) => {
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Comment your thoughts!"
         />
        <button onClick={() => { commentSend(); updateComments(); }}>Comment</button>

@@ -26,6 +26,7 @@ export const removeFavorite = async (title) => {
         });
         const result = await response.json();
         console.log(result);
+        return response;
 };
 
 export const submitPayload = async (data) => {
@@ -107,6 +108,14 @@ export const fetchFavorites = async () => {
     console.log(result);
     return result;
 };
+
+export const checkFavorited = async (title) => {
+    const response = await fetch(`http://localhost:3000/search/favorites/${encodeURIComponent(title)}`, {
+        method: 'GET'
+    });
+    const result = await response.json();
+    return result.isFavorited;
+} 
 
 export const fetchLikes = async () => {
     const response = await fetch('http://localhost:3000/likes');
