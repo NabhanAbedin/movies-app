@@ -86,7 +86,7 @@ app.post('/reviews', async (req,res)=> {
     };
 });
 
-app.get('/movies/:id', async (req,res)=> {
+app.get('/reviews/:id', async (req,res)=> {
     console.log('GET /movies called');
     try {
         const id = req.params.id;

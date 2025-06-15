@@ -84,7 +84,7 @@ export const checkLiked = async (id) => {
 }
 
 export const fetchMovie = async (id) => {
-    const res = await fetch(`http://localhost:3000/movies/${id}`);
+    const res = await fetch(`http://localhost:3000/reviews/${id}`);
     const result = await res.json();
     console.log(result);
     return result;
