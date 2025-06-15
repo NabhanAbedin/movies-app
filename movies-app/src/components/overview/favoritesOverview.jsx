@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchFavorites, handleReviewLength, removeFavorite } from "../../api/apiFunctions.js";
 import favoriteImg from '../../images/favorite.png';
+import { Link } from "react-router-dom";
 
 const FavoritesOverview = () => {
     const [data, setData] = useState(null);
@@ -34,9 +35,10 @@ const FavoritesOverview = () => {
             </div>
                          
             <div className="bento-grid">
-                {data && data.map(({ title, img, overview, _id, release }, index) => (
+                {data && data.map(({ title, img, overview, _id, release, movieId }, index) => (
                     <div key={_id} className={`bento-card card-${(index % 6) + 1}`}>
                         <div className="card-content">
+                            <Link to={`/movie/${movieId}`}>
                             <div className="movie-poster">
                                 {img ? (
                                     <img src={img} alt={title} />
@@ -55,6 +57,7 @@ const FavoritesOverview = () => {
                                 <p className="movie-overview">{handleReviewLength(overview)}</p>
                                 <p className="movie-release">release: {release}</p>
                             </div>
+                            </Link>
                             <button 
                                 className="gradient-purple-button"
                                 onClick={()=> handleCLick(title)}

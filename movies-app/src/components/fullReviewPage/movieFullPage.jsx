@@ -5,6 +5,7 @@ import Nav from '../Nav.jsx';
 import Comments from './comments.jsx';
 import LikeButton from './likeButton.jsx';
 import { fetchMovie } from '../../api/apiFunctions.js';
+import Loading from '../loading.jsx';
 
 
 const MovieFullPage = () => {
@@ -27,7 +28,7 @@ const MovieFullPage = () => {
     return (
        <>
        <Nav />
-       {data && (
+       {data ? (
         <> 
         <div className="full-movie-wrapper">
         
@@ -46,7 +47,7 @@ const MovieFullPage = () => {
         <Comments id={id} data={data} setData={setData}/>
 
         </>
-       )}
+       ): <Loading />}
        </>
     );
 };

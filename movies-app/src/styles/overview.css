@@ -454,7 +454,6 @@
 
 /* Additional styles for LikesOverview component */
 
-/* Movie Release Date */
 .likes-overview-wrapper {
     background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #ff6b9d 100%);
     padding: 2rem;
@@ -466,6 +465,26 @@
 
 .likes-overview-wrapper a {
     text-decoration: none;
+}
+
+/* Bento Card - Add position relative for absolute positioning context */
+.bento-card {
+    position: relative;
+    /* Ensure there's enough bottom padding for the like button */
+    padding-bottom: 4rem !important;
+}
+
+/* Review Actions Container - Position absolutely at bottom */
+.review-actions {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 /* Like Button */
@@ -601,10 +620,18 @@
     
     .bento-card {
         min-height: 280px; /* Smaller min-height for mobile */
+        padding-bottom: 3.5rem !important; /* Adjust for mobile */
     }
     
     .card-content {
         padding: 1.25rem;
+        padding-bottom: 0.5rem; /* Reduce bottom padding since actions are absolute */
+    }
+    
+    .review-actions {
+        bottom: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
     }
     
     .movie-poster {
@@ -620,11 +647,6 @@
         font-size: 0.875rem;
         -webkit-line-clamp: 3; /* Fewer lines on mobile */
         line-clamp: 3;
-    }
-    
-    .review-actions {
-        margin-top: 0.75rem;
-        padding-top: 0.75rem;
     }
     
     .like-button {
@@ -676,6 +698,13 @@
     
     .bento-card {
         min-height: 260px; /* Even smaller for very small screens */
+        padding-bottom: 3rem !important; /* Adjust for very small screens */
+    }
+    
+    .review-actions {
+        bottom: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
     }
     
     .like-button {
@@ -717,6 +746,11 @@
     
     .bento-card {
         min-height: 340px; /* Larger min-height for desktop */
+        padding-bottom: 4rem !important; /* Ensure space for like button */
+    }
+    
+    .card-content {
+        padding-bottom: 0.5rem; /* Reduce bottom padding since actions are absolute */
     }
 }
 
@@ -728,6 +762,7 @@
     
     .bento-card {
         min-height: 360px; /* Even larger for wide screens */
+        padding-bottom: 4.5rem !important; /* More space for larger screens */
     }
 }
 

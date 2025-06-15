@@ -338,6 +338,10 @@
     transition: all 0.3s ease;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .search-container {

@@ -7,11 +7,11 @@ export const handleReviewLength = (review) => {
     };
   };
 
-export const addFavorite = async (title,posterURL,overview, release) => {
+export const addFavorite = async (title,posterURL,overview, release, id) => {
         const response = await fetch('http://localhost:3000/favorites', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({title: title, img: posterURL, overview: overview, release: release})
+            body: JSON.stringify({title: title, img: posterURL, overview: overview, release: release, id: id})
         });
         const result = await response.json();
         console.log(result);
@@ -51,6 +51,12 @@ export const searchRequest = async (text) => {
     const res = await fetch(`http://localhost:3000/search?query=${encodeURIComponent(text)}`);
     const result = await res.json();
     console.log(result.results[0]);
+    return result;
+};
+
+export const searchMovieById = async (id) => {
+    const response = await fetch(`http://localhost:3000/search/${id}`);
+    const result = await response.json();
     return result;
 };
 

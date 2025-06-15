@@ -2,7 +2,7 @@ const Favorite = require('../models/Favorite');
 
 const makeFavorite = async (req,res) => {
     console.log('/POST /favorites called');
-    const { title, img, overview, release } = req.body;
+    const { title, img, overview, release, id } = req.body;
     try {
         const alreadyFavorited = await Favorite.findOne({title});
 
@@ -14,7 +14,8 @@ const makeFavorite = async (req,res) => {
             title: title,
             img: img,
             overview: overview,
-            release: release
+            release: release,
+            movieId: id
         });
         console.log(newFavorite);
         await newFavorite.save();

@@ -34,7 +34,7 @@ const searchMovies = async (req,res) => {
         : null,
           }));
           
-          //console.log(results);
+          console.log(results[0]);
           res.json({results});
     } catch (error) {
         console.error('Error calling TMDb:', error);
@@ -42,6 +42,42 @@ const searchMovies = async (req,res) => {
     };
 
     
+};
+
+const searchById = async (req,res) => {
+    const {id} = req.params;
+    const apiKey = process.env.TMDB_API_KEY;
+    const tmdbUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+
+    try {
+        const tmdbRes = await fetch(tmdbUrl);
+        if (!tmdbRes.ok) {
+            return res
+              .status(tmdbRes.status)
+              .json({ error: 'TMDb returned an error' });
+          };
+          const tmdbJson = await tmdbRes.json();
+          if (!tmdbJson) {
+            return res.status(404).json('movie with id not found');
+          }
+          const result = {
+            id: tmdbJson.id,
+            title: tmdbJson.title,
+            overview: tmdbJson.overview,
+            release: tmdbJson.release_date,
+            posterUrl: tmdbJson.poster_path
+        ? `https://image.tmdb.org/t/p/w500${tmdbJson.poster_path}`
+        : null,
+          }
+         res.json(result);
+
+          
+
+    } catch (error) {
+        console.error('Error calling TMDb:', error);
+        res.status(500).json({ error: 'Internal server error' });
+
+    }
 };
 
 const checkFavorited = async (req,res) => {
@@ -64,5 +100,6 @@ const checkFavorited = async (req,res) => {
 
 module.exports = {
     searchMovies,
+    searchById,
     checkFavorited
 };
