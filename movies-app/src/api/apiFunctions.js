@@ -55,7 +55,7 @@ export const searchRequest = async (text) => {
 };
 
 export const addlikeCollection = async (id) => {
-    const response =  await fetch(`http://localhost:3000/comments/likes/${id}`, {
+    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
         method: 'POST'
     });
     const result = await response.json();
@@ -64,7 +64,7 @@ export const addlikeCollection = async (id) => {
 };
 
 export const deleteLikeCollection = async (title,id) => {
-    const response =  await fetch(`http://localhost:3000/comments/likes/${id}`, {
+    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({title: title})
@@ -75,7 +75,7 @@ export const deleteLikeCollection = async (title,id) => {
 };
 
 export const checkLiked = async (id) => {
-    const response =  await fetch(`http://localhost:3000/overview/likes/${id}`, {
+    const response =  await fetch(`http://localhost:3000/likes/overview/${id}`, {
         method: 'GET',
     });
     const result = await response.json();
