@@ -5,8 +5,10 @@
     max-width: 400px;
 }
 
+
 /* Modern Search Input - styled like searchmovie.css */
 input[type="search"] {
+    margin-top: 20px;
     width: 100%;
     max-width: 400px;
     padding: 1rem 1.25rem;

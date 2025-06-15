@@ -1,255 +1,258 @@
+/* Main Container */
 .inputs-container {
-    margin-top: 80px;
-    padding: 3rem 2rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
     min-height: 100vh;
-    position: relative;
-  }
-  
-  .inputs-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-  }
-  
-  .inputs-container > h1 {
-    font-size: 3rem;
-    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.inputs-container > h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
     text-align: center;
-    margin-bottom: 3rem;
-    color: black;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.input-container h1 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-row {
     position: relative;
-    z-index: 1;
-  }
-  
-  .input-container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      0 1px 0px rgba(255, 255, 255, 0.4) inset;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .input-container:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 12px 48px rgba(0, 0, 0, 0.15),
-      0 1px 0px rgba(255, 255, 255, 0.4) inset;
-  }
-  
-  .input-container h1 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #1a202c;
-    letter-spacing: -0.025em;
-  }
-  
-  .input-row {
-    position: relative;
-  }
-  
-  .input-container input,
-  .input-container textarea,
-  .input-container .review-textarea {
+}
+
+/* Modern Input Styling - Matching SearchBar */
+.input-container input,
+.input-container textarea,
+.input-container .review-textarea {
     width: 100%;
     padding: 1rem 1.25rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
     font-size: 1rem;
     font-weight: 500;
-    transition: all 0.2s ease;
-    background: #ffffff;
-    color: #2d3748;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     font-family: inherit;
-  }
-  
-  .input-container textarea,
-  .input-container .review-textarea {
-    resize: vertical;
-    min-height: 120px;
+    resize: none;
+}
+
+.input-container textarea,
+.input-container .review-textarea {
+    min-height: 140px;
     line-height: 1.6;
-  }
-  
-  .input-container input:focus,
-  .input-container textarea:focus,
-  .input-container .review-textarea:focus {
-    outline: none;
+    resize: vertical;
+}
+
+.input-container input:focus,
+.input-container textarea:focus,
+.input-container .review-textarea:focus {
     border-color: #667eea;
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  }
-  
-  .input-container input::placeholder,
-  .input-container textarea::placeholder,
-  .input-container .review-textarea::placeholder {
-    color: #a0aec0;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.input-container input:hover,
+.input-container textarea:hover,
+.input-container .review-textarea:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.input-container input::placeholder,
+.input-container textarea::placeholder,
+.input-container .review-textarea::placeholder {
+    color: gray;
     font-weight: 400;
-  }
-  
-  .publish-container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2.5rem;
-    margin-top: 2rem;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      0 1px 0px rgba(255, 255, 255, 0.4) inset;
+}
+
+/* Publish Container */
+.publish-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    width: 100%;
-    max-width: none;
-    position: relative;
-    z-index: 1;
-    box-sizing: border-box;
-  }
-  
-  .publish-container h1 {
-    font-size: 1.875rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: #1a202c;
-    letter-spacing: -0.025em;
-  }
-  
-  .publish-container button {
-    width: 200px;
-    padding: 1rem 2rem;
-    background: #1a202c;
-    color: white;
+    gap: 1.5rem;
+    padding: 3rem 0 2rem;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 2rem;
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+}
+
+/* Modern Button - Matching SearchBar Style */
+.publish-container button {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background: #667eea;
     border: none;
     border-radius: 16px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(26, 32, 44, 0.3);
-    letter-spacing: 0.025em;
-  }
-  
-  .publish-container button:hover {
-    background: #2d3748;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    letter-spacing: 0.01em;
+    min-width: 140px;
+}
+
+.publish-container button:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.publish-container button:active {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(26, 32, 44, 0.4);
-  }
-  
-  .publish-container button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(26, 32, 44, 0.3);
-  }
-  
-  .success-container {
-    margin-top: 2rem;
-    background: rgba(72, 187, 120, 0.1);
-    border: 2px solid rgba(72, 187, 120, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.publish-container button:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Success State - Matching SearchBar Style */
+.success-container {
+    padding: 1rem 1.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid rgba(16, 185, 129, 0.2);
     border-radius: 16px;
-    padding: 1.5rem 2rem;
-    animation: fadeInOut 2s ease-in-out;
-  }
-  
-  .success-text {
-    color: #38a169;
-    font-weight: 600;
-    font-size: 1.125rem;
+    animation: slideIn 0.3s ease-out;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.success-text {
+    color: #059669;
+    font-weight: 500;
+    font-size: 1rem;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-  }
-  
-  .success-text::before {
+    gap: 0.5rem;
+}
+
+.success-text::before {
     content: '✓';
-    width: 24px;
-    height: 24px;
-    background: #38a169;
-    color: black;
+    width: 20px;
+    height: 20px;
+    background: #10b981;
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.875rem;
-    font-weight: bold;
-  }
-  
-  /* Two-column layout for title and release */
-  .inputs-row {
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+/* Layout Grid */
+.inputs-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  
-  .inputs-row .input-container {
-    margin-bottom: 0;
-  }
-  
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
+}
+
+.inputs-row .input-container {
+    margin: 0;
+}
+
+/* Animations - Matching SearchBar */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
     }
-    20% {
-      opacity: 1;
-      transform: translateY(0);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-    80% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     .inputs-container {
-      padding: 2rem 1rem;
-      margin-top: 70px;
+        padding: 3rem 1.5rem 2rem;
+        gap: 1.5rem;
     }
     
     .inputs-container > h1 {
-      font-size: 2.25rem;
-      margin-bottom: 2rem;
-    }
-    
-    .input-container,
-    .publish-container {
-      padding: 2rem;
-      border-radius: 20px;
-      margin-bottom: 1.5rem;
+        font-size: 2rem;
     }
     
     .inputs-row {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .inputs-row .input-container {
-      margin-bottom: 0;
+    .publish-container {
+        padding: 2rem 0 1rem;
+        margin-top: 1.5rem;
     }
     
-    .publish-container h1 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+    .publish-container button {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 1rem 2rem;
     }
-  }
+}
+
+@media (max-width: 480px) {
+    .inputs-container {
+        padding: 2rem 1rem;
+    }
+    
+    .inputs-container > h1 {
+        font-size: 1.75rem;
+    }
+    
+    .input-container input,
+    .input-container textarea,
+    .input-container .review-textarea {
+        padding: 1rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Reduced Motion - Matching SearchBar */
+@media (prefers-reduced-motion: reduce) {
+    .input-container input,
+    .input-container textarea,
+    .input-container .review-textarea,
+    .publish-container button {
+        transition-duration: 0.01ms !important;
+    }
+    
+    .success-container {
+        animation: none;
+    }
+}

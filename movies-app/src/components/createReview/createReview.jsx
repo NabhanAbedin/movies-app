@@ -3,8 +3,9 @@ import Nav from '../Nav.jsx';
 import '../../styles/createReview.css';
 import { submitPayload } from '../../api/apiFunctions.js';
 import SearchBar from './searchBar.jsx';
+import { data } from 'react-router-dom';
 
-const UserInput = ({setData,value}) => {
+const UserInput = ({reviewData, setReviewData}) => {
     //const [text,setText] = useState('');
 
    // const handleType = (e) => {
@@ -16,18 +17,18 @@ const UserInput = ({setData,value}) => {
     return (
         <div>
           <h1>Enter your Movie!</h1>
-          <SearchBar placeholder={'title'}/>
+          <SearchBar placeholder={'title'} reviewData={reviewData} setReviewData={setReviewData}/>
         </div>
     );
 };
 
-const ReviewInput = ({ setData }) => {
+const ReviewInput = ({ setReviewData }) => {
   const [text, setText] = useState('');
 
   const handleType = (e) => {
     const newVal = e.target.value;
     setText(newVal)
-     setData(prev => ({ ...prev, review: newVal }));
+    setReviewData(prev => ({ ...prev, review: newVal }));
   };
   
 
@@ -40,9 +41,6 @@ const ReviewInput = ({ setData }) => {
           value={text}
           onChange={handleType}
           placeholder="Enter your review!"
-          style={{
-            border: text ? '2px solid green' : '2px solid gray'
-          }}
         />
       </div>
     </div>
@@ -50,17 +48,17 @@ const ReviewInput = ({ setData }) => {
 };
 
 const CreateReview = () => {
-        const [data,setData] = useState({});
+        const [ reviewData, setReviewData ] = useState({});
         const [success,setSuccess] = useState(false);
 
         const required = ['title','release','review'];
 
         const handleSubmit = async () => {
-            console.log(data);
-            const hasAllKeys = required.every(key=> Object.hasOwn(data,key));
+            console.log(reviewData);
+            const hasAllKeys = required.every(key=> Object.hasOwn(reviewData,key));
             if (hasAllKeys) {
                 try {
-                    const response = await submitPayload(data);
+                    const response = await submitPayload(reviewData);
                     if (response.ok) {
                         setSuccess(true);
 
@@ -81,8 +79,8 @@ const CreateReview = () => {
                 <Nav/>
                 <div className='inputs-container'>
                 <h1>Create Your Review!</h1>
-                 <UserInput />
-                <ReviewInput setData={setData} />
+                 <UserInput reviewData={reviewData} setReviewData={setReviewData}/>
+                <ReviewInput setReviewData={setReviewData} />
                 <div className='publish-container'>
                 <h1>Publish Your Review!</h1>
                 <button onClick={handleSubmit}>Publish</button>

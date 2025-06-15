@@ -68,9 +68,10 @@ app.post('/reviews', async (req,res)=> {
     console.log('body:', req.body);
     try  {
         
-        const {title, release, review} = req.body;
+        const {title, release, review, posterUrl} = req.body;
         const newReview = new Review({
         title: title,
+        img: posterUrl,
         release: release,
         review: review,
         comments: [],

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { searchRequest } from "../../api/apiFunctions.js";
 import '../../styles/searchbar.css';
 
-const SearchBar = ({placeholder}) => {
+const SearchBar = ({placeholder, reviewData, setReviewData}) => {
     const [ text, setText ] = useState('');
     const [ data, setData ] = useState(null);
 
@@ -18,17 +18,30 @@ const SearchBar = ({placeholder}) => {
         },300);
 
         return () => clearTimeout(timer);
-    },[text])
+    },[text]);
+
+    const handleCLick = (title,release, posterUrl) => {
+        setText(title);
+        setReviewData(prev => ({ ...prev, title: title, release: release, posterUrl: posterUrl }));
+    };
+
+    const validateTitle = () => {
+        const includes = data.some(movie => movie.title.includes(text));
+        if (includes) return;
+        const {title, release} = data[0];
+        setText(title);
+        setReviewData(prev => ({ ...prev, title: title, release: release }));
+    }
 
     return (
         <div className="search-wrapper">
-            <input type="search" value={text} onChange={e => setText(e.target.value)} placeholder={placeholder} />
+            <input type="search" value={text} onChange={e => setText(e.target.value)} placeholder={placeholder} onBlur={validateTitle}/>
             {data && (
                 <div className="results-dropdown">
-                    {data.map((data)=> (
-                        <div key={data.id} className="results-container">
-                            <p className="results-title">{data.title}</p>
-                            <p className="results-release">{data.release}</p>
+                    {data.map(({id,title,release, posterUrl})=> (
+                        <div key={id} className="results-container" onMouseDown={()=> handleCLick(title,release,posterUrl)}>
+                            <p className="results-title">{title}</p>
+                            <p className="results-release">{release}</p>
                         </div>
                     ))}
                 </div>
