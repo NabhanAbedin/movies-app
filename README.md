@@ -7,27 +7,27 @@ A full-stack MERN (MongoDB, Express, React, Node.js) movie rating application fo
 https://movie-ratings-tan.vercel.app/home
 ## Features
 
-Browse Movies: Search for your favorite films by title.
+- Browse Movies: Search for your favorite films by title.
 
-Rate & Review: Submit your own rating and review text for any movie.
+- Rate & Review: Submit your own rating and review text for any movie.
 
-Favorites: Add or remove movies to a personal favorites list.
+- Favorites: Add or remove movies to a personal favorites list.
 
-Comments: Leave comments on movie detail pages.
+- Comments: Leave comments on movie detail pages.
 
-Likes: Like or unlike movies.
+- Likes: Like or unlike movies.
 
-MVC Structure: Clear separation of Models, Views (API responses + React UI), and Controllers.
+- MVC Structure: Clear separation of Models, Views (API responses + React UI), and Controllers.
 
-Environment Configuration: Uses environment variables to store API keys and database URLs.
+- Environment Configuration: Uses environment variables to store API keys and database URLs.
 
 ## Architecture
 
-Models: Mongoose schemas define Review, Comment, Like, Favorite, etc.
+- Models: Mongoose schemas define Review, Comment, Like, Favorite, etc.
 
-Controllers: Business logic for each resource lives in routes/* and their associated controller functions.
+- Controllers: Business logic for each resource lives in routes/* and their associated controller functions.
 
-Views (React): Components in /src fetch from the API and render movie lists, detail pages, and forms.
+- Views (React): Components in /src fetch from the API and render movie lists, detail pages, and forms.
 
 ## Tech Stack
 
