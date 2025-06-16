@@ -8,8 +8,10 @@ import { searchRequest } from "../../api/apiFunctions.js";
 const SearchMovie = () => {
     const [text, setText] =  useState('');
     const [data,setData] = useState(null);
+    const [clicked,setClicked] = useState(null);
 
     const handleSearch = async () => {
+        setClicked(true);
         try {
             const result = await searchRequest(text);
             if (!result.results.length) {
@@ -36,7 +38,7 @@ const SearchMovie = () => {
                 <input type="search" value={text} onChange={(e)=> setText(e.target.value)} placeholder="Search Movie!" onKeyDown={handleKeyDown}/>
                 <button onClick={handleSearch}>Search</button>
             </div>
-            {data && <MovieDescription data={data} text={text} /> }
+            {clicked && (data ? <MovieDescription data={data} text={text} /> : <Loading />) }
         </>
     );
 };
