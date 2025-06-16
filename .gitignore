@@ -6,3 +6,4 @@ movies-app/.env.production
 movies-app/server/.env
 movies-app/server/.env
 movies-app/server/.env
+movies-app/server/.env
