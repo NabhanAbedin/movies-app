@@ -1,6 +1,6 @@
 # Movie Ratings App
 
-A full-stack MERN (MongoDB, Express, React, Node.js) movie rating application following the MVC architecture. Users can browse movie data fetched via an external API (using an API key), submit ratings and reviews, favorite movies, and leave comments.
+A full-stack MERN (MongoDB, Express, React, Node.js) movie rating application following MVC architecture. Users can browse movie data fetched via an external API (using an API key), submit ratings and reviews, favorite movies, and leave comments.
 
 ### Live demonstration of the web app:
 
@@ -41,8 +41,8 @@ Hosting:
 
 - Frontend deployed on Vercel
 
-- Backend deployed on Render (or your choice of provider)
-
+- Backend deployed on Render
+  
 ## Future implementations
 - adding user autentication in order to create unique favorites and liked lists
 
