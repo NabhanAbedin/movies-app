@@ -43,3 +43,6 @@ Hosting:
 
 - Backend deployed on Render (or your choice of provider)
 
+## Future implementations
+- adding user autentication in order to create unique favorites and liked lists
+
