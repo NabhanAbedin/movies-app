@@ -28,9 +28,9 @@ const SearchBar = ({placeholder, reviewData, setReviewData}) => {
     const validateTitle = () => {
         const includes = data.some(movie => movie.title.includes(text));
         if (includes) return;
-        const {title, release} = data[0];
+        const {title, release, posterUrl } = data[0];
         setText(title);
-        setReviewData(prev => ({ ...prev, title: title, release: release }));
+        setReviewData(prev => ({ ...prev, title: title, release: release, posterUrl: posterUrl }));
     }
 
     return (
