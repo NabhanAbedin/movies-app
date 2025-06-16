@@ -1,3 +1,5 @@
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 export const handleReviewLength = (review) => {
     if (review.length > 100) {
       const newReview = review.slice(0,150) + '...';
@@ -8,7 +10,7 @@ export const handleReviewLength = (review) => {
   };
 
 export const addFavorite = async (title,posterURL,overview, release, id) => {
-        const response = await fetch('http://localhost:3000/favorites', {
+        const response = await fetch(`${API_BASE}/favorites`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({title: title, img: posterURL, overview: overview, release: release, id: id})
@@ -19,7 +21,7 @@ export const addFavorite = async (title,posterURL,overview, release, id) => {
 
 export const removeFavorite = async (title) => {
     
-        const response = await fetch('http://localhost:3000/favorites', {
+        const response = await fetch(`${API_BASE}/favorites`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({title: title})
@@ -30,7 +32,7 @@ export const removeFavorite = async (title) => {
 };
 
 export const submitPayload = async (data) => {
-    const response = await fetch('http://localhost:3000/reviews', {
+    const response = await fetch(`${API_BASE}/reviews`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
@@ -41,27 +43,27 @@ export const submitPayload = async (data) => {
 };
 
 export const fetchReviews = async () => {
-    const response = await fetch('http://localhost:3000/reviews');
+    const response = await fetch(`${API_BASE}/reviews`);
     const result = await response.json();
     console.log(result);
     return result;
 };
 
 export const searchRequest = async (text) => {
-    const res = await fetch(`http://localhost:3000/search?query=${encodeURIComponent(text)}`);
+    const res = await fetch(`${API_BASE}/search?query=${encodeURIComponent(text)}`);
     const result = await res.json();
     console.log(result.results[0]);
     return result;
 };
 
 export const searchMovieById = async (id) => {
-    const response = await fetch(`http://localhost:3000/search/${id}`);
+    const response = await fetch(`${API_BASE}/search/${id}`);
     const result = await response.json();
     return result;
 };
 
 export const addlikeCollection = async (id) => {
-    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
+    const response =  await fetch(`${API_BASE}/likes/${id}`, {
         method: 'POST'
     });
     const result = await response.json();
@@ -70,7 +72,7 @@ export const addlikeCollection = async (id) => {
 };
 
 export const deleteLikeCollection = async (title,id) => {
-    const response =  await fetch(`http://localhost:3000/likes/${id}`, {
+    const response =  await fetch(`${API_BASE}/likes/${id}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({title: title})
@@ -81,7 +83,7 @@ export const deleteLikeCollection = async (title,id) => {
 };
 
 export const checkLiked = async (id) => {
-    const response =  await fetch(`http://localhost:3000/likes/overview/${id}`, {
+    const response =  await fetch(`${API_BASE}/likes/overview/${id}`, {
         method: 'GET',
     });
     const result = await response.json();
@@ -90,14 +92,14 @@ export const checkLiked = async (id) => {
 }
 
 export const fetchMovie = async (id) => {
-    const res = await fetch(`http://localhost:3000/reviews/${id}`);
+    const res = await fetch(`${API_BASE}/reviews/${id}`);
     const result = await res.json();
     console.log(result);
     return result;
 };
 
 export const commentsPayload = async (id,text) => {
-    const response = await fetch(`http://localhost:3000/comments/${id}`, {
+    const response = await fetch(`${API_BASE}/comments/${id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({comment: text })
@@ -109,14 +111,14 @@ export const commentsPayload = async (id,text) => {
 };
 
 export const fetchFavorites = async () => {
-    const response = await fetch('http://localhost:3000/favorites');
+    const response = await fetch(`${API_BASE}/favorites`);
     const result = await response.json();
     console.log(result);
     return result;
 };
 
 export const checkFavorited = async (title,release) => {
-    const response = await fetch(`http://localhost:3000/search/favorites?title=${encodeURIComponent(title)}&release=${encodeURIComponent(release)}`, {
+    const response = await fetch(`${API_BASE}/search/favorites?title=${encodeURIComponent(title)}&release=${encodeURIComponent(release)}`, {
         method: 'GET'
     });
     const result = await response.json();
@@ -124,7 +126,7 @@ export const checkFavorited = async (title,release) => {
 } 
 
 export const fetchLikes = async () => {
-    const response = await fetch('http://localhost:3000/likes');
+    const response = await fetch(`${API_BASE}/likes`);
     const result = await response.json();
     console.log(result);
     return result;

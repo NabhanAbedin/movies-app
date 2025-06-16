@@ -1,3 +1,5 @@
 server/.env
 .DS_Store
 .DS_Store
+movies-app/.env.development
+movies-app/.env.production
